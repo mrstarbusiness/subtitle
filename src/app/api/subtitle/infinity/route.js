@@ -1,10 +1,11 @@
 import { subtitleModel } from "@/models/subtitle-model";
+import { dbConnect } from "@/service/mongo";
 import { replaceMongoIdInArray } from "@/utils/data-util";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
-  try {
-    const searchParams = request.nextUrl.searchParams;
+
+  const searchParams = request.nextUrl.searchParams;
 
     let page = searchParams.get("page");
     let limit = searchParams.get("limit");
@@ -12,6 +13,10 @@ export async function GET(request) {
     let genre = searchParams.get("genre");
     let language = searchParams.get("language");
     let type = searchParams.get("type");
+
+    await dbConnect();
+  try {
+    
 
     console.log("query parameter : ", page, limit, year, genre, language);
 

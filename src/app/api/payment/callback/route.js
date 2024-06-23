@@ -1,12 +1,15 @@
 import { grantToken, makeHeaders } from "@/lib/bkashPayment";
 import { paymentModel } from "@/models/payment-model";
 import { userModel } from "@/models/user-model";
+import { dbConnect } from "@/service/mongo";
 import axios from "axios";
 import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 import { auth } from "../../../../auth";
 
 export async function GET(request) {
+  await dbConnect();
+  
   const searchParams = request.nextUrl.searchParams;
   const paymentID = searchParams.get("paymentID");
   const status = searchParams.get("status");

@@ -1,10 +1,12 @@
 import { grantToken, makeHeaders } from "@/lib/bkashPayment";
 import { configurationModel } from "@/models/configuration-model";
+import { dbConnect } from "@/service/mongo";
 import axios from "axios";
 import { NextResponse } from "next/server";
 
 
 export async function POST(request) {
+  await dbConnect();
   try {
     const requestData = await request.json();
     const bkashGrantToken = await grantToken();

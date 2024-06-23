@@ -3,11 +3,11 @@ import { dbConnect } from "@/service/mongo";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
+  await dbConnect();
   let data = [];
   const searchParams = request.nextUrl.searchParams
   const query = searchParams.get('query')
   try {
-    await dbConnect();
 
     data = await subtitleModel
       .find({
