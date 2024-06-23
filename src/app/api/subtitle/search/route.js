@@ -1,9 +1,11 @@
 import { IMDB_URL } from "@/helpers/config";
 import { imdbModel } from "@/models/imdb-model";
+import { dbConnect } from "@/service/mongo";
 import { NextResponse } from "next/server";
 import { auth } from "../../../../auth";
 
 export async function GET(request) {
+  await dbConnect();
   try {
     const session = await auth();
 
