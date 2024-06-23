@@ -86,6 +86,7 @@ export const POST = async (request) => {
     await user.save();
 
     revalidatePath("/dashboard/my-subtitle");
+    revalidatePath("/");
 
     return new NextResponse("Subtitle has been created", {
       status: 201,
